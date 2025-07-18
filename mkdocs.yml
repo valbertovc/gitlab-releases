@@ -1,0 +1,12 @@
+site_name: gitlab-releases
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - python
+        - bash
+
+nav:
+  - gitlab-releases: index.md
+  - How-To Guides: how-to-guides.md

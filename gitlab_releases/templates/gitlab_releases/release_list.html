@@ -1,0 +1,49 @@
+{% load gitlab_releases_filters %}
+{% block content %}
+    <ul class="timeline">
+        {% if releases %}
+            {% for release in releases %}
+                <li>
+                    <div class="timeline-date">
+                        {{ release.released_at }}
+                        <small class="inline">
+                            {{ release.commit.author_name }}
+                        </small>
+                    </div>
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-content">
+                        <h3>{{ release.name }}</h3>
+                        <table>
+                            <tbody>
+                            {% for item in release.changelogs %}
+                                <tr>
+                                    <td>{{ item.description|capfirst }}</td>
+                                    <td>{{ item.context|default:"-"|capfirst }}</td>
+                                    <td>
+                                        <span class="status status-{{ item.section|release_section_css }} inline">
+                                            {{ item.section|title }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <img class="foto-circle" style="height: 20px;width: 20px; margin: 0 10px 0 0" src="{{ item.merge_request.author.avatar_url }}" alt="{{ item.merge_request.author.name }}" class="avatar">
+                                        {{ item.merge_request.author.name }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>
+                <div class="timeline-date"></div>
+                <div class="timeline-icon"></div>
+                <div class="timeline-content">
+                    <h4>No releases found.</h4>
+                </div>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
