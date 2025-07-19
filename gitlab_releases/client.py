@@ -1,3 +1,5 @@
+from typing import Optional, Union
+
 import gitlab
 
 from gitlab_releases.conf import settings

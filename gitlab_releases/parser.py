@@ -1,5 +1,5 @@
 import re
-from typing import Optional
+from typing import Optional, Union
 
 SECTION_HEADER_RE = re.compile(r"^###\s+(?P<section>\w+)", re.IGNORECASE)
 ITEM_RE = re.compile(

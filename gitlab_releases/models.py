@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Union
 
 from django.utils.dateparse import parse_datetime
 
@@ -95,7 +95,7 @@ class Pipeline:
     before_sha: str | None = None
     tag: bool | None = None
     yaml_errors: str | None = None
-    user: dict | User | None = None
+    user: dict | User = None
     started_at: datetime | None = None
     finished_at: datetime | None = None
     committed_at: datetime | None = None
@@ -130,28 +130,28 @@ class MergeRequest:
     state: str
     created_at: datetime
     updated_at: datetime
-    merged_by: dict | User | None = None
-    merge_user: dict | User | None = None
+    merged_by: dict | User = None
+    merge_user: dict | User = None
     merged_at: datetime | None = None
-    closed_by: dict | User | None = None
+    closed_by: dict | User = None
     closed_at: datetime | None = None
     target_branch: str | None = None
     source_branch: str | None = None
     user_notes_count: int | None = None
     upvotes: int | None = None
     downvotes: int | None = None
-    author: dict | User | None = None
-    assignees: list[dict | User] | None = None
-    assignee: dict | User | None = None
-    reviewers: list[dict | User] | None = None
+    author: dict | User = None
+    assignees: list[dict | User] = None
+    assignee: dict | User = None
+    reviewers: list[dict | User] = None
     source_project_id: int | None = None
     target_project_id: int | None = None
-    labels: list | Label | None = None
+    labels: list[dict | Label] = None
     draft: bool | None = None
     imported: bool | None = None
     imported_from: str | None = None
     work_in_progress: bool | None = None
-    milestone: dict | Milestone | None = None
+    milestone: dict | Milestone = None
     merge_when_pipeline_succeeds: bool | None = None
     merge_status: str | None = None
     detailed_merge_status: str | None = None
@@ -257,8 +257,8 @@ class Release:
     description: str
     created_at: datetime
     released_at: datetime
-    author: [dict | User]
-    commit: [dict | Commit]
+    author: dict | User
+    commit: dict | Commit
     commit_path: str | None
     tag_path: str | None
     upcoming_release: bool | None = None
