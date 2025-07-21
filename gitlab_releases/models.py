@@ -15,8 +15,8 @@ class User:
     state: str
     avatar_url: str
     web_url: str
-    public_email: str | None = None
-    locked: bool | None = None
+    public_email: Optional[str] = None
+    locked: Optional[bool] = None
 
     def __repr__(self):
         return f"User(username={self.username})"
@@ -36,9 +36,9 @@ class Commit:
     committer_name: str
     committer_email: str
     committed_date: datetime
-    trailers: dict | None = None
-    extended_trailers: dict | None = None
-    web_url: str | None = None
+    trailers: Optional[dict] = None
+    extended_trailers: Optional[dict] = None
+    web_url: Optional[str] = None
 
     def __post_init__(self):
         self.authored_date = parse_datetime(self.authored_date)
@@ -63,10 +63,10 @@ class Milestone:
     state: str
     created_at: datetime
     updated_at: datetime
-    due_date: datetime | None = None
-    start_date: datetime | None = None
-    expired: bool | None = None
-    web_url: str | None = None
+    due_date: Optional[datetime] = None
+    start_date: Optional[datetime] = None
+    expired: Optional[bool] = None
+    web_url: Optional[str] = None
 
     def __post_init__(self):
         self.created_at = parse_datetime(self.created_at)
@@ -92,17 +92,17 @@ class Pipeline:
     created_at: datetime
     updated_at: datetime
     web_url: str
-    before_sha: str | None = None
-    tag: bool | None = None
-    yaml_errors: str | None = None
-    user: dict | None = None
-    started_at: datetime | None = None
-    finished_at: datetime | None = None
-    committed_at: datetime | None = None
-    duration: int | None = None
-    queued_duration: int | None = None
-    coverage: str | None = None
-    detailed_status: dict | None = None
+    before_sha: Optional[str] = None
+    tag: Optional[bool] = None
+    yaml_errors: Optional[str] = None
+    user: Optional[dict] = None
+    started_at: Optional[datetime] = None
+    finished_at: Optional[datetime] = None
+    committed_at: Optional[datetime] = None
+    duration: Optional[int] = None
+    queued_duration: Optional[int] = None
+    coverage: Optional[str] = None
+    detailed_status: Optional[dict] = None
 
     def __post_init__(self):
         self.created_at = parse_datetime(self.created_at)
@@ -130,59 +130,59 @@ class MergeRequest:
     state: str
     created_at: datetime
     updated_at: datetime
-    merged_by: dict | User = None
-    merge_user: dict | User = None
-    merged_at: datetime | None = None
-    closed_by: dict | User = None
-    closed_at: datetime | None = None
-    target_branch: str | None = None
-    source_branch: str | None = None
-    user_notes_count: int | None = None
-    upvotes: int | None = None
-    downvotes: int | None = None
-    author: dict | User = None
-    assignees: list[dict | User] = None
-    assignee: dict | User = None
-    reviewers: list[dict | User] = None
-    source_project_id: int | None = None
-    target_project_id: int | None = None
-    labels: list[dict | Label] = None
-    draft: bool | None = None
-    imported: bool | None = None
-    imported_from: str | None = None
-    work_in_progress: bool | None = None
-    milestone: dict | Milestone = None
-    merge_when_pipeline_succeeds: bool | None = None
-    merge_status: str | None = None
-    detailed_merge_status: str | None = None
-    merge_after: str | None = None
-    sha: str | None = None
-    merge_commit_sha: str | None = None
-    squash_commit_sha: str | None = None
-    discussion_locked: bool | None = None
-    should_remove_source_branch: bool | None = None
-    force_remove_source_branch: bool | None = None
-    prepared_at: datetime | None = None
-    reference: str | None = None
-    references: dict | None = None
-    web_url: str | None = None
-    time_stats: dict | None = None
-    squash: bool | None = None
-    squash_on_merge: bool | None = None
-    task_completion_status: dict | None = None
-    has_conflicts: bool | None = None
-    blocking_discussions_resolved: bool | None = None
-    subscribed: bool | None = None
-    changes_count: str | None = None
-    latest_build_started_at: datetime | None = None
-    latest_build_finished_at: datetime | None = None
-    first_deployed_to_production_at: datetime | None = None
-    pipeline: dict | Pipeline | None = None
-    head_pipeline: dict | Pipeline | None = None
-    diff_refs: dict | None = None
-    merge_error: str | None = None
-    first_contribution: bool | None = None
-    user: dict | None = None
+    merged_by: Union[dict, User] = None
+    merge_user: Union[dict, User] = None
+    merged_at: Optional[datetime] = None
+    closed_by: Union[dict, User] = None
+    closed_at: Optional[datetime] = None
+    target_branch: Optional[str] = None
+    source_branch: Union[str, None] = None
+    user_notes_count: Optional[int] = None
+    upvotes: Optional[int] = None
+    downvotes: Optional[int] = None
+    author: Union[dict, User] = None
+    assignees: list[Union[dict, User]] = None
+    assignee: Union[dict, User] = None
+    reviewers: list[Union[dict, User]] = None
+    source_project_id: Optional[int] = None
+    target_project_id: Optional[int] = None
+    labels: list[Union[dict, Label]] = None
+    draft: Optional[bool] = None
+    imported: Optional[bool] = None
+    imported_from: Optional[str] = None
+    work_in_progress: Optional[bool] = None
+    milestone: Union[dict, Milestone] = None
+    merge_when_pipeline_succeeds: Optional[bool] = None
+    merge_status: Optional[str] = None
+    detailed_merge_status: Optional[str] = None
+    merge_after: Optional[str] = None
+    sha: Optional[str] = None
+    merge_commit_sha: Optional[str] = None
+    squash_commit_sha: Optional[str] = None
+    discussion_locked: Optional[bool] = None
+    should_remove_source_branch: Optional[bool] = None
+    force_remove_source_branch: Optional[bool] = None
+    prepared_at: Optional[datetime] = None
+    reference: Optional[str] = None
+    references: Optional[dict] = None
+    web_url: Optional[str] = None
+    time_stats: Optional[dict] = None
+    squash: Optional[bool] = None
+    squash_on_merge: Optional[bool] = None
+    task_completion_status: Optional[dict] = None
+    has_conflicts: Optional[bool] = None
+    blocking_discussions_resolved: Optional[bool] = None
+    subscribed: Optional[bool] = None
+    changes_count: Optional[str] = None
+    latest_build_started_at: Optional[datetime] = None
+    latest_build_finished_at: Optional[datetime] = None
+    first_deployed_to_production_at: Optional[datetime] = None
+    pipeline: Optional[dict | Pipeline] = None
+    head_pipeline: Optional[dict | Pipeline] = None
+    diff_refs: Optional[dict] = None
+    merge_error: Optional[str] = None
+    first_contribution: Optional[bool] = None
+    user: Optional[dict] = None
 
     def __post_init__(self):
         self.created_at = parse_datetime(self.created_at)
@@ -225,10 +225,10 @@ class Changelog:
     section: str
     description: str
     commit_url: str
-    type: str | None = None
-    context: str | None = None
-    merge_request_url: str | None = None
-    commit_sha: str | None = None
+    type: Optional[str] = None
+    context: Optional[str] = None
+    merge_request_url: Optional[str] = None
+    commit_sha: Optional[str] = None
 
     def __repr__(self):
         return (
@@ -236,7 +236,7 @@ class Changelog:
         )
 
     @property
-    def merge_request_id(self) -> int | None:
+    def merge_request_id(self) -> Optional[int]:
         if self.merge_request_url:
             return int(self.merge_request_url.split("/")[-1])
         return None
@@ -257,15 +257,15 @@ class Release:
     description: str
     created_at: datetime
     released_at: datetime
-    author: dict | User
-    commit: dict | Commit
-    commit_path: str | None = None
-    tag_path: str | None = None
-    upcoming_release: bool | None = None
-    assets: dict | None = None
+    author: Union[dict, User]
+    commit: Union[dict, Commit]
+    commit_path: Optional[str] = None
+    tag_path: Optional[str] = None
+    upcoming_release: Optional[bool] = None
+    assets: Optional[dict] = None
     evidences: list[Evidence] = field(default_factory=list)
-    _links: dict | None = None
-    changelogs: list[Changelog] | None = None
+    _links: Optional[dict] = None
+    changelogs: Optional[list[Changelog]] = None
 
     def __post_init__(self):
         self.author = User(**self.author)

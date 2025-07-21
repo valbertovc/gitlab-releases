@@ -1,5 +1,5 @@
 import re
-from typing import Optional, Union
+from typing import Optional
 
 SECTION_HEADER_RE = re.compile(r"^###\s+(?P<section>\w+)", re.IGNORECASE)
 ITEM_RE = re.compile(
@@ -26,14 +26,14 @@ def parse_changelogs(markdown: str) -> list[dict]:
     return items
 
 
-def extract_section_header(line: str) -> str | None:
+def extract_section_header(line: str) -> Optional[str]:
     match = SECTION_HEADER_RE.match(line)
     if match:
         return match.group("section").lower()
     return None
 
 
-def parse_item_line(line: str, section: str | None) -> dict | None:
+def parse_item_line(line: str, section: Optional[str] = None) -> Optional[dict]:
     if not section:
         return None
     match = ITEM_RE.match(line)
@@ -55,7 +55,7 @@ def parse_item_line(line: str, section: str | None) -> dict | None:
     }
 
 
-def split_type_context_description(full: str) -> tuple[str | None, str | None, str]:
+def split_type_context_description(full: str) -> tuple[Optional[str], Optional[str], str]:
     if ":" not in full:
         return None, None, full
     prefix, description = map(str.strip, full.split(":", 1))
@@ -66,5 +66,5 @@ def split_type_context_description(full: str) -> tuple[str | None, str | None, s
         return prefix.strip(), None, description
 
 
-def extract_sha_from_url(url: str) -> str | None:
+def extract_sha_from_url(url: str) -> Optional[str]:
     return url.rstrip("/").split("/")[-1] if url else None

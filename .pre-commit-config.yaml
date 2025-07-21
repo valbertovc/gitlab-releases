@@ -16,13 +16,6 @@ repos:
       - id: check-merge-conflict
       - id: detect-private-key
 
-  - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.8.0
-    hooks:
-      - id: pip-compile
-        name: pip-compile requirements.txt
-        args: [ pyproject.toml, -o, requirements.txt ]
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.12.4
     hooks:

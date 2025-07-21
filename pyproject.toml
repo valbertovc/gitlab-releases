@@ -52,8 +52,8 @@ dev = [
 
 [tool.ruff.lint]
 select = [
-    "UP",  # pyupgrade
     "I",  # isort
+    "F",   # pyflakes
 ]
 fixable = ["ALL"]
 
