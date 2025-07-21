@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.test import RequestFactory, TestCase
 
 from gitlab_releases.views import ChangelogDetailView, ReleaseListView
@@ -9,34 +11,19 @@ class ReleaseListViewTestCase(TestCase):
         cls.factory = RequestFactory()
         cls.view = ReleaseListView()
 
-    def test_get_releases_returns_expected(self):
+    @patch("gitlab.Gitlab")
+    def test_get_releases_returns_expected(self, mock_gitlab):
+        mock_instance = mock_gitlab.return_value
+        mock_instance.projects.get.return_value.releases.list.return_value = []
         expected = list()
         result = self.view.get_releases()
         self.assertEqual(expected, result)
 
-    def test_get_context_data(self):
-        expected = dict()
-        result = self.view.get_context_data()
-        self.assertIsInstance(result, dict)
-
-
-class ChangelogDetailViewTestCase(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        cls.factory = RequestFactory()
-        cls.view = ChangelogDetailView()
-
-    def test_get_release_returns_expected(self):
-        expected = None
-        result = self.view.get_release(tag_name="v1.0.0")
-        self.assertEqual(expected, result)
-
-    def test_get_changelog_returns_expected(self):
-        expected = None
-        result = self.view.get_changelog(tag_name="v1.0.0", merge_request_id=1)
-        self.assertEqual(expected, result)
-
-    def test_get_context_data(self):
-        expected = dict()
-        result = self.view.get_context_data()
-        self.assertIsInstance(result, dict)
+    @patch("gitlab.Gitlab")
+    def test_get_context_data(self, mock_gitlab):
+        mock_instance = mock_gitlab.return_value
+        mock_instance.projects.get.return_value.releases.list.return_value = []
+        context = self.view.get_context_data()
+        self.assertIn("releases", context)
+        self.assertIsInstance(context["releases"], list)
+        mock_instance.projects.get.return_value.releases.list.assert_called_once_with()

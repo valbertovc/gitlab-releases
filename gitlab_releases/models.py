@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional, Union
 
@@ -95,7 +95,7 @@ class Pipeline:
     before_sha: str | None = None
     tag: bool | None = None
     yaml_errors: str | None = None
-    user: dict | User = None
+    user: dict | None = None
     started_at: datetime | None = None
     finished_at: datetime | None = None
     committed_at: datetime | None = None
@@ -223,12 +223,12 @@ class MergeRequest:
 @dataclass
 class Changelog:
     section: str
-    type: str | None
-    context: str | None
     description: str
     commit_url: str
-    merge_request_url: str | None
-    commit_sha: str | None
+    type: str | None = None
+    context: str | None = None
+    merge_request_url: str | None = None
+    commit_sha: str | None = None
 
     def __repr__(self):
         return (
@@ -259,11 +259,11 @@ class Release:
     released_at: datetime
     author: dict | User
     commit: dict | Commit
-    commit_path: str | None
-    tag_path: str | None
+    commit_path: str | None = None
+    tag_path: str | None = None
     upcoming_release: bool | None = None
     assets: dict | None = None
-    evidences: list[Evidence] | None = None
+    evidences: list[Evidence] = field(default_factory=list)
     _links: dict | None = None
     changelogs: list[Changelog] | None = None
 

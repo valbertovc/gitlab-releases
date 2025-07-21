@@ -37,8 +37,8 @@ class ChangelogDetailView(TemplateView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.tag_name = self.kwargs.get("tag_name")
-        self.merge_request_id = self.kwargs.get("merge_request_id")
+        self.tag_name = kwargs.get("tag_name")
+        self.merge_request_id = kwargs.get("merge_request_id")
         self.client = Gitlab()
         self.release = None
 
