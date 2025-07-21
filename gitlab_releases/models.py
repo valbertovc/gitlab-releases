@@ -179,8 +179,8 @@ class MergeRequest:
     latest_build_started_at: Optional[datetime] = None
     latest_build_finished_at: Optional[datetime] = None
     first_deployed_to_production_at: Optional[datetime] = None
-    pipeline: Optional[dict | Pipeline] = None
-    head_pipeline: Optional[dict | Pipeline] = None
+    pipeline: Union[dict, Pipeline] = None
+    head_pipeline: Optional[Union[dict, Pipeline]] = None
     diff_refs: Optional[dict] = None
     merge_error: Optional[str] = None
     first_contribution: Optional[bool] = None
