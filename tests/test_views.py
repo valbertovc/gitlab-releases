@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 from django.test import RequestFactory, TestCase
 
-from gitlab_releases.views import ChangelogDetailView, ReleaseListView
+from gitlab_releases.views import ReleaseListView
 
 
 class ReleaseListViewTestCase(TestCase):

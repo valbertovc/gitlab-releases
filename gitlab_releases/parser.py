@@ -55,7 +55,9 @@ def parse_item_line(line: str, section: Optional[str] = None) -> Optional[dict]:
     }
 
 
-def split_type_context_description(full: str) -> tuple[Optional[str], Optional[str], str]:
+def split_type_context_description(
+    full: str,
+) -> tuple[Optional[str], Optional[str], str]:
     if ":" not in full:
         return None, None, full
     prefix, description = map(str.strip, full.split(":", 1))

@@ -51,7 +51,10 @@ class ChangelogDetailView(TemplateView):
     def get_changelog(self, tag_name, merge_request_id):
         release = self.get_release(tag_name)
         for changelog in release.changelogs:
-            if changelog.merge_request_id and changelog.merge_request_id == merge_request_id:
+            if (
+                changelog.merge_request_id
+                and changelog.merge_request_id == merge_request_id
+            ):
                 changelog.merge_request = load_merge_request(self.client, changelog)
                 return changelog
         # raise ChangelogNotFound()

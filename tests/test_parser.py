@@ -6,7 +6,6 @@ from gitlab_releases import parser
 class ParserTestCase(TestCase):
     def test_parse_changelogs_returns_expected(self):
         markdown = """\n## Added\n- New feature\n"""
-        expected = [{"section": "Added", "item": "New feature"}]
         result = parser.parse_changelogs(markdown)
         self.assertIsInstance(result, list)
 

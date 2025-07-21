@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Optional
 
 import gitlab
 
@@ -12,10 +12,10 @@ class Gitlab:
         url: str = None,
         private_token: str = None,
         api_version: str = None,
-        timeout: float | None = None,
-        per_page: int | None = None,
-        pagination: str | None = None,
-        order_by: str | None = None,
+        timeout: Optional[float] = None,
+        per_page: Optional[int] = None,
+        pagination: Optional[str] = None,
+        order_by: Optional[str] = None,
     ):
         url = url or settings.GITLAB_URL
         private_token = private_token or settings.GITLAB_PRIVATE_TOKEN

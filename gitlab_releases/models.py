@@ -45,7 +45,9 @@ class Commit:
         self.committed_date = parse_datetime(self.committed_date)
 
     def __repr__(self):
-        return f"Commit(id={self.short_id}, title={self.title}, author={self.author_name})"
+        return (
+            f"Commit(id={self.short_id}, title={self.title}, author={self.author_name})"
+        )
 
 
 @dataclass
@@ -231,9 +233,7 @@ class Changelog:
     commit_sha: Optional[str] = None
 
     def __repr__(self):
-        return (
-            f"Changelog(section={self.section}, type={self.type}, description={self.description})"
-        )
+        return f"Changelog(section={self.section}, type={self.type}, description={self.description})"
 
     @property
     def merge_request_id(self) -> Optional[int]:
