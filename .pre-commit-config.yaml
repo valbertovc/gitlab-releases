@@ -1,0 +1,45 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude: "static"
+        types: [python]
+      - id: fix-encoding-pragma
+        args: ["--remove"]
+      - id: no-commit-to-branch
+      - id: trailing-whitespace
+        types: [python]
+      - id: debug-statements
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.4
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.25.0
+    hooks:
+    -   id: django-upgrade
+        args: [--target-version, "4.0"]   # Replace with Django version
+
+  - repo: local
+    hooks:
+      - id: django-migrations
+        name: Check django migrations
+        entry: python manage.py makemigrations --check
+        language: system
+        types: [python]
+        pass_filenames: false
+      - id: django-check
+        name: Check django
+        entry: python manage.py check
+        language: system
+        types: [python]
+        pass_filenames: false

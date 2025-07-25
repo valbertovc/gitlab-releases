@@ -1,0 +1,67 @@
+[project]
+name = "gitlab_releases"
+version = "0.0.1"
+description = "Gitlab Releases for Django projects"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+keywords = ["Django", "Gitlab", "releases"]
+requires-python = ">=3.9,<3.14"
+authors = [
+    { name = "Valberto Carneiro", email = "valbertovc@gmail.com" }
+]
+classifiers=[
+    "Development Status :: 4 - Beta",
+    "Framework :: Django :: 3",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 5",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+dependencies = [
+    "django >=3,<6",
+    "python-gitlab>=6.1.0",
+]
+
+[project.urls]
+changelog = "https://github.com/valbertovc/gitlab-releases/blob/main/CHANGELOG.md"
+homepage = "https://github.com/valbertovc/gitlab-releases"
+repository = "https://github.com/valbertovc/gitlab-releases"
+
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2.post1",
+    "coverage>=7",
+    "mkdocs>=1.6.1",
+    "pre-commit>=3",
+    "tox>=4.27.0",
+]
+
+[tool.ruff]
+line-length = 88
+respect-gitignore = true
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "I",  # isort
+    "F",   # pyflakes
+]
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
