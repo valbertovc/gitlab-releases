@@ -1,49 +1,130 @@
-{% load gitlab_releases_filters %}
-{% block content %}
-    <ul class="timeline">
-        {% if releases %}
-            {% for release in releases %}
-                <li>
-                    <div class="timeline-date">
-                        {{ release.released_at }}
-                        <small class="inline">
-                            {{ release.commit.author_name }}
-                        </small>
-                    </div>
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-content">
-                        <h3>{{ release.name }}</h3>
-                        <table>
-                            <tbody>
-                            {% for item in release.changelogs %}
-                                <tr>
-                                    <td>{{ item.description|capfirst }}</td>
-                                    <td>{{ item.context|default:"-"|capfirst }}</td>
-                                    <td>
-                                        <span class="status status-{{ item.section|release_section_css }} inline">
-                                            {{ item.section|title }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <img class="foto-circle" style="height: 20px;width: 20px; margin: 0 10px 0 0" src="{{ item.merge_request.author.avatar_url }}" alt="{{ item.merge_request.author.name }}" class="avatar">
-                                        {{ item.merge_request.author.name }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
+<!doctype html>
+<html lang="en">
 
-                            </tbody>
-                        </table>
-                    </div>
-                </li>
-            {% endfor %}
-        {% else %}
-            <li>
-                <div class="timeline-date"></div>
-                <div class="timeline-icon"></div>
-                <div class="timeline-content">
-                    <h4>No releases found.</h4>
-                </div>
-            </li>
-        {% endif %}
-    </ul>
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+        ul.timeline {
+            list-style-type: none;
+            position: relative;
+        }
+
+        ul.timeline:before {
+            content: ' ';
+            background: #d4d9df;
+            display: inline-block;
+            position: absolute;
+            left: 29px;
+            width: 2px;
+            height: 100%;
+            z-index: 400;
+        }
+
+        ul.timeline>li {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        ul.timeline>li:before {
+            content: ' ';
+            background: white;
+            display: inline-block;
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid #22c0e8;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            z-index: 400;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-9 offset-md-1">
+                <h3>Releases</h3>
+                <ul class="timeline">
+                    {% for release in releases %}
+                    <li>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ release.tag_name }} 
+                                    <small class="text-muted float-end">
+                                        {{release.released_at }}
+                                    </small>
+                                </h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for item in release.changelogs %}
+                                <li class="list-group-item">
+                                    <div>
+                                        <small>
+                                            {% if item.context %}
+                                            <strong class="">
+                                                {{ item.context|default:"-"|capfirst }}
+                                            </strong>
+                                            {% endif %}
+                                            <span class="text-primary">
+                                                {{ item.section|title }}
+                                            </span>
+                                            <span class="text-muted">by</span>
+                                            <img class="rounded-circle"
+                                                style="height: 20px;width: 20px; margin: 0 5px 0 5px"
+                                                src="{{ item.merge_request.author.avatar_url }}"
+                                                alt="{{ item.merge_request.author.name }}">
+                                            {{ item.merge_request.author.name }}
+                                        </small>
+                                    </div>
+                                    {{ item.description|capfirst }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9 offset-md-1">
+                {% block pagination %}
+                    {% if is_paginated %}
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                                        Previous
+                                    </a>
+                                </li>
+                                <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                                        Next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

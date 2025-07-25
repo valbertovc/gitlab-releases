@@ -69,6 +69,7 @@ class Milestone:
     start_date: Optional[datetime] = None
     expired: Optional[bool] = None
     web_url: Optional[str] = None
+    project_id: Optional[int] = None
 
     def __post_init__(self):
         self.created_at = parse_datetime(self.created_at)
@@ -268,8 +269,12 @@ class Release:
     changelogs: Optional[list[Changelog]] = None
 
     def __post_init__(self):
-        self.author = User(**self.author)
-        self.commit = Commit(**self.commit)
+        self.author = (
+            User(**self.author) if isinstance(self.author, dict) else self.author
+        )
+        self.commit = (
+            Commit(**self.commit) if isinstance(self.commit, dict) else self.commit
+        )
         self.evidences = [Evidence(**evidence) for evidence in self.evidences]
         self.changelogs = self._load_changelogs()
         self.created_at = parse_datetime(self.created_at)
