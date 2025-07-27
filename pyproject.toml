@@ -5,7 +5,7 @@ description = "Gitlab Releases for Django projects"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-keywords = ["Django", "Gitlab", "releases"]
+keywords = ["Django", "Gitlab", "Releases"]
 requires-python = ">=3.9,<3.14"
 authors = [
     { name = "Valberto Carneiro", email = "valbertovc@gmail.com" }
@@ -36,9 +36,9 @@ dependencies = [
 ]
 
 [project.urls]
-changelog = "https://github.com/valbertovc/gitlab-releases/blob/main/CHANGELOG.md"
-homepage = "https://github.com/valbertovc/gitlab-releases"
-repository = "https://github.com/valbertovc/gitlab-releases"
+Changelog = "https://github.com/valbertovc/gitlab-releases/releases"
+Repository = "https://github.com/valbertovc/gitlab-releases"
+Documentation = "https://gitlab-releases.readthedocs.io/en/latest/"
 
 
 [dependency-groups]
@@ -46,6 +46,7 @@ dev = [
     "build>=1.2.2.post1",
     "coverage>=7",
     "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.16",
     "pre-commit>=3",
     "tox>=4.27.0",
 ]

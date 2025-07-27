@@ -1,7 +1,7 @@
 site_name: gitlab-releases
 
 theme:
-    name: readthedocs
+    name: material
     highlightjs: true
     hljs_languages:
         - python
