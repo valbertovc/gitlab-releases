@@ -1,6 +1,6 @@
 [project]
 name = "gitlab-releases"
-version = "0.0.3"
+version = "0.0.4"
 description = "Show Gitlab Releases into your Django projects"
 readme = "README.md"
 license = "MIT"
