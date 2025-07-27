@@ -63,7 +63,7 @@ After installation and configuration, visit `/releases/` in your Django project 
 
 ## Useful Links
 
-- [Documentation](https://github.com/valbertovc/gitlab-releases#readme)
+- [Documentation](https://github.com/valbertovc/gitlab-releases/tree/main/docs)
 - [Changelog](https://github.com/valbertovc/gitlab-releases/releases)
 - [PyPI Page](https://pypi.org/project/gitlab-releases/)
 - [Repository](https://github.com/valbertovc/gitlab-releases)
