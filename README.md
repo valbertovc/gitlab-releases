@@ -2,11 +2,11 @@
 # gitlab-releases
 
 ![License](https://img.shields.io/github/license/valbertovc/gitlab-releases)
-![Build Status](https://img.shields.io/github/actions/workflow/status/valbertovc/gitlab-releases/ci.yml?branch=main)
+![Build Status](https://img.shields.io/github/actions/workflow/status/valbertovc/gitlab-releases/release.yml)
 ![Coverage](https://img.shields.io/codecov/c/github/valbertovc/gitlab-releases)
 ![PyPI](https://img.shields.io/pypi/v/gitlab-releases)
 ![Python Versions](https://img.shields.io/pypi/pyversions/gitlab-releases)
-![Django Versions](https://img.shields.io/pypi/djversions/gitlab-releases)
+![Django Versions](https://img.shields.io/pypi/frameworkversions/django/gitlab-releases)
 
 ## Short Description
 
