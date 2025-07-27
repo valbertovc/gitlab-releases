@@ -11,8 +11,8 @@ jobs:
         with:
           python-version: "3.13"
       - uses: astral-sh/ruff-action@v3
-      - run: ruff check
-      - run: ruff format
+      - run: ruff check --output-format=github
+      - run: ruff format --diff
 
   test:
     needs: code-quality
