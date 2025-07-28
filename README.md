@@ -10,7 +10,7 @@
 
 ## Short Description
 
-`gitlab-releases` provides a release page and changelog integration for your Django project, making it easy to display your releases if you manage them using GitLab releases feature.
+`gitlab-releases` provides an in-memory release page and changelog integration for your Django project, making it easy to display your releases if you manage them using GitLab releases feature.
 
 ## Main Features
 
@@ -19,7 +19,7 @@
 - Integrate release data into your Django templates
 - Simple configuration and setup
 
-## Get Started
+## Get started
 
 ### Installation
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Include the app's URLs in your `urls.py`:
+### Include the app's URLs in your `urls.py`:
 
 ```python
 from django.urls import path, include
@@ -49,21 +49,21 @@ urlpatterns = [
 ]
 ```
 
-## How to Use the Package or Django App
+### Configure your `settings.py` file
 
-After installation and configuration, visit `/releases/` in your Django project to see the list of releases fetched from your GitLab repository. You can customize the templates or use the provided template tags in your own templates:
-
-```django
-{% load gitlab_releases_filters %}
-{% for release in releases %}
-    <h2>{{ release.title }}</h2>
-    <div>{{ release.description|markdown }}</div>
-{% endfor %}
+```python
+GITLAB_PROJECT_ID = 123456
+GITLAB_PRIVATE_TOKEN = "your-token-here"
+GITLAB_URL = "https://gitlab.com"
 ```
+
+### Visit your release page 
+
+After installation and configuration, visit `/releases/` in your Django project to see the list of releases fetched from your GitLab repository.
 
 ## Useful Links
 
-- [Documentation](https://github.com/valbertovc/gitlab-releases/tree/main/docs)
+- [Detailed Documentation](https://github.com/valbertovc/gitlab-releases/tree/main/docs)
 - [Changelog](https://github.com/valbertovc/gitlab-releases/releases)
 - [PyPI Page](https://pypi.org/project/gitlab-releases/)
 - [Repository](https://github.com/valbertovc/gitlab-releases)
