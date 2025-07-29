@@ -13,12 +13,10 @@ This site contains the project documentation for the
 
 ## Table of contents
 
-1. [How-To Guides](how-to-guides.md)
+1. [How To Customize](how-to-customize.md)
+2. [Get Started](get-started.md)
 
-# Introduction
-
-
-Main features:
+## Main features:
 
 - Display a list of releases from your GitLab repository
 - Show detailed changelog for each release
@@ -26,34 +24,9 @@ Main features:
 - Custom template tags for advanced rendering
 - Simple configuration and setup
 
-
-## Get started
-Install gitlab-releases in your virtual environment:
-```bash
-pip install gitlab-releases
-```
-Add it to your `INSTALLED_APPS` in `settings.py`:
-```python
-INSTALLED_APPS = [
-    # ...existing apps...
-    'gitlab_releases',
-]
-```
-Include the app's URLs in your `urls.py`:
-```python
-from django.urls import path, include
-
-urlpatterns = [
-    # ...existing urls...
-    path('releases/', include('gitlab_releases.urls')),
-]
-```
-Visit `/releases/` in your Django project to see the list of releases.
-
-
 ## Useful links
 
-1. [Documentation](https://valbertovc.github.io/gitlab-releases/)
+1. [Documentation](https://gitlab-releases.readthedocs.io/)
 2. [Changelog](https://github.com/valbertovc/gitlab-releases/releases)
 3. [PyPI Page](https://pypi.org/project/gitlab-releases/)
 4. [Repository](https://github.com/valbertovc/gitlab-releases)

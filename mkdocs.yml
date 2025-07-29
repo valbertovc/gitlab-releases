@@ -1,4 +1,5 @@
 site_name: gitlab-releases
+repo_url: https://github.com/valbertovc/gitlab-releases
 
 theme:
     name: material
@@ -9,4 +10,8 @@ theme:
 
 nav:
   - gitlab-releases: index.md
-  - How-To Guides: how-to-guides.md
+  - Get Started: get-started.md
+  - How To Customize: how-to-customize.md
+
+plugins:
+  - tags
