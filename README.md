@@ -53,8 +53,8 @@ urlpatterns = [
 
 ```python
 GITLAB_PROJECT_ID = 123456
-GITLAB_PRIVATE_TOKEN = "your-token-here"
-GITLAB_URL = "https://gitlab.com"
+GITLAB_TOKEN = "your-token-here"
+GITLAB_HOST = "https://gitlab.com"
 ```
 
 ### Visit your release page 

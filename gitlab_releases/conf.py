@@ -2,8 +2,8 @@ from django.conf import settings
 
 GITLAB_RELEASES = {
     "GITLAB_PROJECT_ID": None,
-    "GITLAB_PRIVATE_TOKEN": None,
-    "GITLAB_URL": "https://gitlab.com",
+    "GITLAB_TOKEN": None,
+    "GITLAB_HOST": "https://gitlab.com",
     "GITLAB_API_VERSION": "4",
     "GITLAB_TIMEOUT": 5.0,  # seconds
     "GITLAB_PER_PAGE": 10,

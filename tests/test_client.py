@@ -12,8 +12,8 @@ class GitlabTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.settings_patch = override_settings(
-            GITLAB_URL=cls.gitlab_url,
-            GITLAB_PRIVATE_TOKEN="fake-token",
+            GITLAB_HOST=cls.gitlab_url,
+            GITLAB_TOKEN="fake-token",
             GITLAB_API_VERSION="4",
             GITLAB_TIMEOUT=10,
             GITLAB_PER_PAGE=10,

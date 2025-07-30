@@ -17,8 +17,8 @@ class Gitlab:
         pagination: Optional[str] = None,
         order_by: Optional[str] = None,
     ):
-        url = url or settings.GITLAB_URL
-        private_token = private_token or settings.GITLAB_PRIVATE_TOKEN
+        url = url or settings.GITLAB_HOST
+        private_token = private_token or settings.GITLAB_TOKEN
         api_version = api_version or settings.GITLAB_API_VERSION
         timeout = timeout or settings.GITLAB_TIMEOUT
         per_page = per_page or settings.GITLAB_PER_PAGE
