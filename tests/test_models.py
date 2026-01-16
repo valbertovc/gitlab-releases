@@ -77,6 +77,23 @@ class PipelineTestCase(TestCase):
         expected = str(pipeline)
         self.assertEqual(expected, repr(pipeline))
 
+    def test_archived(self):
+        pipeline = models.Pipeline(
+            id=2,
+            iid=2,
+            project_id=1,
+            sha="abcdef",
+            ref="main",
+            status="success",
+            source="push",
+            created_at="2023-10-01T00:00:00Z",
+            updated_at="2023-10-01T00:00:00Z",
+            web_url="http://example.com/pipelines/2",
+            archived=True,
+        )
+        expected = True
+        self.assertEqual(expected, pipeline.archived)
+
 
 class MergeRequestTestCase(TestCase):
     def test_repr(self):
