@@ -43,9 +43,6 @@ class ReleaseListView(ListView):
         ordering = self.get_ordering()
         page = self.get_page()
         sort = self.get_sort()
-        print(
-            f"Fetching releases with ordering: {ordering}, page: {page}, sort: {sort}"
-        )
         client = Gitlab(order_by=ordering, per_page=self.paginate_by)
         releases = load_releases(client, page=page, sort=sort)
         for release in releases:
