@@ -106,6 +106,7 @@ class Pipeline:
     queued_duration: Optional[int] = None
     coverage: Optional[str] = None
     detailed_status: Optional[dict] = None
+    archived: Optional[bool] = None
 
     def __post_init__(self):
         self.created_at = parse_datetime(self.created_at)

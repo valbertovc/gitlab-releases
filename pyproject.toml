@@ -1,6 +1,6 @@
 [project]
 name = "gitlab-releases"
-version = "0.2.0"
+version = "0.2.1"
 description = "Gitlab Releases for Django projects"
 readme = "README.md"
 license = "MIT"
@@ -32,7 +32,7 @@ classifiers=[
 ]
 dependencies = [
     "django >=3,<6",
-    "python-gitlab>=6.1.0",
+    "python-gitlab>=6.5.0",
 ]
 
 [project.urls]
@@ -43,12 +43,12 @@ Documentation = "https://gitlab-releases.readthedocs.io/en/latest/"
 
 [dependency-groups]
 dev = [
-    "build>=1.2.2.post1",
+    "build>=1",
     "coverage>=7",
-    "mkdocs>=1.6.1",
-    "mkdocs-material>=9.6.16",
-    "pre-commit>=3",
-    "tox>=4.27.0",
+    "mkdocs>=1",
+    "mkdocs-material>=9",
+    "pre-commit>=4",
+    "tox>=4",
 ]
 
 [tool.ruff]
