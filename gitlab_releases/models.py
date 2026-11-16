@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from datetime import datetime
 from typing import Optional, Union
 
@@ -17,6 +17,13 @@ class User:
     web_url: str
     public_email: Optional[str] = None
     locked: Optional[bool] = None
+    bot: Optional[bool] = None
+
+    @classmethod
+    def from_api(cls, data: dict) -> "User":
+        """Build a User from a GitLab API payload, ignoring unknown fields."""
+        allowed = {f.name for f in fields(cls)}
+        return cls(**{key: value for key, value in data.items() if key in allowed})
 
     def __repr__(self):
         return f"User(username={self.username})"
@@ -118,7 +125,7 @@ class Pipeline:
         if self.committed_at:
             self.committed_at = parse_datetime(self.committed_at)
         if self.user:
-            self.user = User(**self.user)
+            self.user = User.from_api(self.user)
 
     def __repr__(self):
         return f"Pipeline(id={self.id}, ref={self.ref}, status={self.status})"
@@ -198,19 +205,19 @@ class MergeRequest:
         if self.prepared_at:
             self.prepared_at = parse_datetime(self.prepared_at)
         if self.author:
-            self.author = User(**self.author)
+            self.author = User.from_api(self.author)
         if self.merged_by:
-            self.merged_by = User(**self.merged_by)
+            self.merged_by = User.from_api(self.merged_by)
         if self.merge_user:
-            self.merge_user = User(**self.merge_user)
+            self.merge_user = User.from_api(self.merge_user)
         if self.closed_by:
-            self.closed_by = User(**self.closed_by)
+            self.closed_by = User.from_api(self.closed_by)
         if self.assignees:
-            self.assignees = [User(**assignee) for assignee in self.assignees]
+            self.assignees = [User.from_api(assignee) for assignee in self.assignees]
         if self.assignee:
-            self.assignee = User(**self.assignee)
+            self.assignee = User.from_api(self.assignee)
         if self.reviewers:
-            self.reviewers = [User(**reviewer) for reviewer in self.reviewers]
+            self.reviewers = [User.from_api(reviewer) for reviewer in self.reviewers]
         if self.milestone:
             self.milestone = Milestone(**self.milestone)
         if self.labels:
@@ -271,7 +278,7 @@ class Release:
 
     def __post_init__(self):
         self.author = (
-            User(**self.author) if isinstance(self.author, dict) else self.author
+            User.from_api(self.author) if isinstance(self.author, dict) else self.author
         )
         self.commit = (
             Commit(**self.commit) if isinstance(self.commit, dict) else self.commit
