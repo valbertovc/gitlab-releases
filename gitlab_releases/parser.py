@@ -9,7 +9,9 @@ ITEM_RE = re.compile(
 )
 
 
-def parse_changelogs(markdown: str) -> list[dict]:
+def parse_changelogs(markdown: Optional[str] = None) -> list[dict]:
+    if not markdown:
+        return []
     items = []
     current_section = None
     for line in markdown.splitlines():

@@ -134,16 +134,8 @@ class EvidenceTestCase(TestCase):
 
 
 class ReleaseTestCase(TestCase):
-    def test_repr(self):
-        author = {
-            "id": 1,
-            "name": "Author",
-            "username": "author",
-            "state": "active",
-            "avatar_url": "http://example.com/avatar.png",
-            "web_url": "http://example.com",
-        }
-        commit = {
+    def _commit_payload(self):
+        return {
             "id": "abcdef",
             "short_id": "abc123",
             "title": "Initial commit",
@@ -157,6 +149,18 @@ class ReleaseTestCase(TestCase):
             "committer_email": "committer@example.com",
             "committed_date": "2023-10-01T00:00:00Z",
         }
+
+    def _author_payload(self):
+        return {
+            "id": 1,
+            "name": "Author",
+            "username": "author",
+            "state": "active",
+            "avatar_url": "http://example.com/avatar.png",
+            "web_url": "http://example.com",
+        }
+
+    def test_repr(self):
         release = models.Release(
             tag_name="v1.0.0",
             name="Release 1.0.0",
@@ -164,8 +168,24 @@ class ReleaseTestCase(TestCase):
             description="Release description",
             created_at="2023-10-01T00:00:00Z",
             released_at="2023-10-01T00:00:00Z",
-            author=author,
-            commit=commit,
+            author=self._author_payload(),
+            commit=self._commit_payload(),
         )
         expected = str(release)
         self.assertEqual(expected, repr(release))
+
+    def test_release_with_none_description_has_empty_changelogs(self):
+        release = models.Release(
+            tag_name="v2026.9.9",
+            name="Release v2026.9.9",
+            project_id=3,
+            description=None,
+            created_at="2023-10-01T00:00:00Z",
+            released_at="2023-10-01T00:00:00Z",
+            author=None,
+            commit=self._commit_payload(),
+            evidences=None,
+        )
+        self.assertEqual([], release.changelogs)
+        self.assertIsNone(release.author)
+        self.assertEqual([], release.evidences)

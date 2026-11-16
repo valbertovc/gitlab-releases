@@ -256,16 +256,16 @@ class Release:
     tag_name: str
     name: str
     project_id: int
-    description: str
+    description: Optional[str]
     created_at: datetime
     released_at: datetime
-    author: Union[dict, User]
+    author: Optional[Union[dict, User]]
     commit: Union[dict, Commit]
     commit_path: Optional[str] = None
     tag_path: Optional[str] = None
     upcoming_release: Optional[bool] = None
     assets: Optional[dict] = None
-    evidences: list[Evidence] = field(default_factory=list)
+    evidences: Optional[list[Evidence]] = field(default_factory=list)
     _links: Optional[dict] = None
     changelogs: Optional[list[Changelog]] = None
 
@@ -276,7 +276,7 @@ class Release:
         self.commit = (
             Commit(**self.commit) if isinstance(self.commit, dict) else self.commit
         )
-        self.evidences = [Evidence(**evidence) for evidence in self.evidences]
+        self.evidences = [Evidence(**evidence) for evidence in (self.evidences or [])]
         self.changelogs = self._load_changelogs()
         self.created_at = parse_datetime(self.created_at)
         self.released_at = parse_datetime(self.released_at)

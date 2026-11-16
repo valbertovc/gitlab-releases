@@ -9,6 +9,12 @@ class ParserTestCase(TestCase):
         result = parser.parse_changelogs(markdown)
         self.assertIsInstance(result, list)
 
+    def test_parse_changelogs_none_returns_empty_list(self):
+        self.assertEqual([], parser.parse_changelogs(None))
+
+    def test_parse_changelogs_empty_string_returns_empty_list(self):
+        self.assertEqual([], parser.parse_changelogs(""))
+
     def test_extract_section_header(self):
         pass
 
