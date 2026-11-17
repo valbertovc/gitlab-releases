@@ -259,24 +259,25 @@ class Release:
     description: Optional[str]
     created_at: datetime
     released_at: datetime
-    author: Optional[Union[dict, User]]
     commit: Union[dict, Commit]
+    author: Optional[Union[dict, User]] = None
     commit_path: Optional[str] = None
     tag_path: Optional[str] = None
     upcoming_release: Optional[bool] = None
     assets: Optional[dict] = None
-    evidences: Optional[list[Evidence]] = field(default_factory=list)
+    evidences: list[Evidence] = field(default_factory=list)
     _links: Optional[dict] = None
     changelogs: Optional[list[Changelog]] = None
 
     def __post_init__(self):
-        self.author = (
-            User(**self.author) if isinstance(self.author, dict) else self.author
-        )
+        if self.author:
+            self.author = (
+                User(**self.author) if isinstance(self.author, dict) else self.author
+            )
         self.commit = (
             Commit(**self.commit) if isinstance(self.commit, dict) else self.commit
         )
-        self.evidences = [Evidence(**evidence) for evidence in (self.evidences or [])]
+        self.evidences = [Evidence(**evidence) for evidence in self.evidences]
         self.changelogs = self._load_changelogs()
         self.created_at = parse_datetime(self.created_at)
         self.released_at = parse_datetime(self.released_at)

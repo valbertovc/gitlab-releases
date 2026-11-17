@@ -9,7 +9,7 @@ ITEM_RE = re.compile(
 )
 
 
-def parse_changelogs(markdown: Optional[str] = None) -> list[dict]:
+def parse_changelogs(markdown: Optional[str]) -> list[dict]:
     if not markdown:
         return []
     items = []
