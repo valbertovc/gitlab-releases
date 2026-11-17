@@ -257,11 +257,11 @@ class Release:
     tag_name: str
     name: str
     project_id: int
-    description: str
+    description: Optional[str]
     created_at: datetime
     released_at: datetime
-    author: Union[dict, User]
     commit: Union[dict, Commit]
+    author: Optional[Union[dict, User]] = None
     commit_path: Optional[str] = None
     tag_path: Optional[str] = None
     upcoming_release: Optional[bool] = None
@@ -271,9 +271,10 @@ class Release:
     changelogs: Optional[list[Changelog]] = None
 
     def __post_init__(self):
-        self.author = (
-            User(**self.author) if isinstance(self.author, dict) else self.author
-        )
+        if self.author:
+            self.author = (
+                User(**self.author) if isinstance(self.author, dict) else self.author
+            )
         self.commit = (
             Commit(**self.commit) if isinstance(self.commit, dict) else self.commit
         )

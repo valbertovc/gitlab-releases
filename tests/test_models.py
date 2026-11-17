@@ -158,28 +158,6 @@ class EvidenceTestCase(TestCase):
 
 class ReleaseTestCase(TestCase):
     def test_repr(self):
-        author = {
-            "id": 1,
-            "name": "Author",
-            "username": "author",
-            "state": "active",
-            "avatar_url": "http://example.com/avatar.png",
-            "web_url": "http://example.com",
-        }
-        commit = {
-            "id": "abcdef",
-            "short_id": "abc123",
-            "title": "Initial commit",
-            "created_at": "2023-10-01T00:00:00Z",
-            "parent_ids": ["123456"],
-            "message": "This is a commit message.",
-            "author_name": "Author Name",
-            "author_email": "author@example.com",
-            "authored_date": "2023-10-01T00:00:00Z",
-            "committer_name": "Committer Name",
-            "committer_email": "committer@example.com",
-            "committed_date": "2023-10-01T00:00:00Z",
-        }
         release = models.Release(
             tag_name="v1.0.0",
             name="Release 1.0.0",
@@ -187,8 +165,87 @@ class ReleaseTestCase(TestCase):
             description="Release description",
             created_at="2023-10-01T00:00:00Z",
             released_at="2023-10-01T00:00:00Z",
-            author=author,
-            commit=commit,
+            author={
+                "id": 1,
+                "name": "Author",
+                "username": "author",
+                "state": "active",
+                "avatar_url": "http://example.com/avatar.png",
+                "web_url": "http://example.com",
+            },
+            commit={
+                "id": "abcdef",
+                "short_id": "abc123",
+                "title": "Initial commit",
+                "created_at": "2023-10-01T00:00:00Z",
+                "parent_ids": ["123456"],
+                "message": "This is a commit message.",
+                "author_name": "Author Name",
+                "author_email": "author@example.com",
+                "authored_date": "2023-10-01T00:00:00Z",
+                "committer_name": "Committer Name",
+                "committer_email": "committer@example.com",
+                "committed_date": "2023-10-01T00:00:00Z",
+            },
         )
         expected = str(release)
         self.assertEqual(expected, repr(release))
+
+    def test_release_with_none_description_has_empty_changelogs(self):
+        release = models.Release(
+            tag_name="v2026.9.9",
+            name="Release v2026.9.9",
+            project_id=3,
+            description=None,
+            created_at="2023-10-01T00:00:00Z",
+            released_at="2023-10-01T00:00:00Z",
+            author={
+                "id": 1,
+                "name": "Author",
+                "username": "author",
+                "state": "active",
+                "avatar_url": "http://example.com/avatar.png",
+                "web_url": "http://example.com",
+            },
+            commit={
+                "id": "abcdef",
+                "short_id": "abc123",
+                "title": "Initial commit",
+                "created_at": "2023-10-01T00:00:00Z",
+                "parent_ids": ["123456"],
+                "message": "This is a commit message.",
+                "author_name": "Author Name",
+                "author_email": "author@example.com",
+                "authored_date": "2023-10-01T00:00:00Z",
+                "committer_name": "Committer Name",
+                "committer_email": "committer@example.com",
+                "committed_date": "2023-10-01T00:00:00Z",
+            },
+        )
+        self.assertEqual([], release.changelogs)
+
+    def test_release_with_omitted_author(self):
+        release = models.Release(
+            tag_name="v1.0.0",
+            name="Release 1.0.0",
+            project_id=3,
+            description="Release description",
+            created_at="2023-10-01T00:00:00Z",
+            released_at="2023-10-01T00:00:00Z",
+            commit={
+                "id": "abcdef",
+                "short_id": "abc123",
+                "title": "Initial commit",
+                "created_at": "2023-10-01T00:00:00Z",
+                "parent_ids": ["123456"],
+                "message": "This is a commit message.",
+                "author_name": "Author Name",
+                "author_email": "author@example.com",
+                "authored_date": "2023-10-01T00:00:00Z",
+                "committer_name": "Committer Name",
+                "committer_email": "committer@example.com",
+                "committed_date": "2023-10-01T00:00:00Z",
+            },
+        )
+        self.assertIsNone(release.author)
+        self.assertEqual([], release.evidences)
