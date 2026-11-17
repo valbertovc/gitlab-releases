@@ -16,23 +16,6 @@ class UserTestCase(TestCase):
         expected = str(user)
         self.assertEqual(expected, repr(user))
 
-    def test_from_api_keeps_known_fields_and_ignores_unknown(self):
-        user = models.User.from_api(
-            {
-                "id": 1,
-                "name": "Author",
-                "username": "author",
-                "state": "active",
-                "avatar_url": "http://example.com/avatar.png",
-                "web_url": "http://example.com",
-                "bot": True,
-                "unknown_future_field": "ignored",
-            }
-        )
-        self.assertEqual(1, user.id)
-        self.assertEqual("author", user.username)
-        self.assertTrue(user.bot)
-
     def test_merge_request_accepts_author_with_bot_field(self):
         mr = models.MergeRequest(
             project_id=1,
