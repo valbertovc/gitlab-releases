@@ -16,6 +16,29 @@ class UserTestCase(TestCase):
         expected = str(user)
         self.assertEqual(expected, repr(user))
 
+    def test_merge_request_accepts_author_with_bot_field(self):
+        mr = models.MergeRequest(
+            project_id=1,
+            id=1,
+            iid=1,
+            title="Merge Request 1",
+            description="Description",
+            state="opened",
+            created_at="2023-10-01T00:00:00Z",
+            updated_at="2023-10-01T00:00:00Z",
+            author={
+                "id": 1,
+                "name": "Author",
+                "username": "author",
+                "state": "active",
+                "avatar_url": "http://example.com/avatar.png",
+                "web_url": "http://example.com",
+                "bot": False,
+            },
+        )
+        self.assertEqual("author", mr.author.username)
+        self.assertFalse(mr.author.bot)
+
 
 class CommitTestCase(TestCase):
     def test_repr(self):

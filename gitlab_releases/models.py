@@ -17,6 +17,7 @@ class User:
     web_url: str
     public_email: Optional[str] = None
     locked: Optional[bool] = None
+    bot: Optional[bool] = None
 
     def __repr__(self):
         return f"User(username={self.username})"
