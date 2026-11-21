@@ -21,12 +21,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        py:
-          - "3.12"
-          - "3.13"
-          - "3.14"
-        os:
-          - ubuntu-latest
+        include:
+          - py: "3.12"
+            tox: py312-django52
+            os: ubuntu-latest
+          - py: "3.13"
+            tox: py313-django60
+            os: ubuntu-latest
+          - py: "3.14"
+            tox: py314-django61
+            os: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup python for test ${{ matrix.py }}
@@ -36,7 +40,7 @@ jobs:
       - run: |
           pip install -U pip
           pip install tox
-      - run: tox
+      - run: tox -e ${{ matrix.tox }}
 
   coverage:
     needs: test
