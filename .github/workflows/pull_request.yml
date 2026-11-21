@@ -22,8 +22,9 @@ jobs:
       fail-fast: false
       matrix:
         py:
+          - "3.12"
           - "3.13"
-          - "3.9"
+          - "3.14"
         os:
           - ubuntu-latest
     steps:

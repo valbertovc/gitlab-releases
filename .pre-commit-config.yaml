@@ -27,7 +27,7 @@ repos:
     rev: 1.25.0
     hooks:
     -   id: django-upgrade
-        args: [--target-version, "4.0"]   # Replace with Django version
+        args: [--target-version, "5.2"]
 
   - repo: local
     hooks:
