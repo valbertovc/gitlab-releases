@@ -1,37 +1,31 @@
 [project]
 name = "gitlab-releases"
-version = "0.2.1"
+version = "0.2.2"
 description = "Gitlab Releases for Django projects"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 keywords = ["Django", "Gitlab", "Releases"]
-requires-python = ">=3.9,<3.14"
+requires-python = ">=3.12"
 authors = [
     { name = "Valberto Carneiro", email = "valbertovc@gmail.com" }
 ]
 classifiers=[
     "Development Status :: 4 - Beta",
-    "Framework :: Django :: 3",
-    "Framework :: Django :: 3.2",
-    "Framework :: Django :: 4",
-    "Framework :: Django :: 4.1",
-    "Framework :: Django :: 5",
-    "Framework :: Django :: 5.1",
     "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Framework :: Django :: 6.1",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
 ]
 dependencies = [
-    "django >=3,<6",
+    "django >=5.2,<7",
     "python-gitlab>=6.5.0",
 ]
 
@@ -54,7 +48,7 @@ dev = [
 [tool.ruff]
 line-length = 88
 respect-gitignore = true
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = [

@@ -6,11 +6,11 @@ jobs:
   code-quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
-      - uses: astral-sh/ruff-action@v3
+      - uses: astral-sh/ruff-action@v4.1.0
       - run: ruff check --output-format=github
       - run: ruff format --diff
 
@@ -21,34 +21,39 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        py:
-          - "3.13"
-          - "3.9"
-        os:
-          - ubuntu-latest
+        include:
+          - py: "3.12"
+            tox: py312-django52
+            os: ubuntu-latest
+          - py: "3.13"
+            tox: py313-django60
+            os: ubuntu-latest
+          - py: "3.14"
+            tox: py314-django61
+            os: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Setup python for test ${{ matrix.py }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.py }}
       - run: |
           pip install -U pip
           pip install tox
-      - run: tox
+      - run: tox -e ${{ matrix.tox }}
 
   coverage:
     needs: test
     name: Check coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
       - name: Install UV
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v10.4.0
         with:
           enable-cache: true
       - name: Install dependencies
@@ -61,6 +66,6 @@ jobs:
           uv run coverage report
           uv run coverage xml
       - name: Code coverage
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
