@@ -34,7 +34,7 @@ Add `gitlab_releases` to your `INSTALLED_APPS` in `settings.py`:
 ```python
 INSTALLED_APPS = [
     # ...existing apps...
-    'gitlab_releases',
+    "gitlab_releases",
 ]
 ```
 
@@ -45,7 +45,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # ...existing urls...
-    path('releases/', include('gitlab_releases.urls')),
+    path("releases/", include("gitlab_releases.urls")),
 ]
 ```
 

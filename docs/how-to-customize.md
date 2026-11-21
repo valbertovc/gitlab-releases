@@ -101,15 +101,16 @@ You can extend or subclass `ReleaseListView` to add custom context, filtering, o
 # myapp/views.py
 from gitlab_releases.views import ReleaseListView
 
+
 class CustomReleaseListView(ReleaseListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         # Example: filter releases by tag prefix
-        return [r for r in queryset if r.tag_name.startswith('v1.')]
+        return [r for r in queryset if r.tag_name.startswith("v1.")]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['my_extra_var'] = 'Custom value'
+        context["my_extra_var"] = "Custom value"
         return context
 ```
 
@@ -120,7 +121,7 @@ from myapp.views import CustomReleaseListView
 from django.urls import path
 
 urlpatterns = [
-    path('releases/', CustomReleaseListView.as_view(), name='custom_release_list'),
+    path("releases/", CustomReleaseListView.as_view(), name="custom_release_list"),
 ]
 ```
 
@@ -130,7 +131,7 @@ You can override the template used by your custom view by setting `template_name
 
 ```python
 class CustomReleaseListView(ReleaseListView):
-    template_name = 'myapp/custom_release_list.html'
+    template_name = "myapp/custom_release_list.html"
     # ...
 ```
 
@@ -147,11 +148,12 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter
 def highlight_feature(section):
-    if section == 'feature':
-        return '⭐'
-    return ''
+    if section == "feature":
+        return "⭐"
+    return ""
 ```
 
 3. Load and use your filter in your template:
